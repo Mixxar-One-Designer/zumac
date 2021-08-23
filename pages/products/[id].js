@@ -10,7 +10,7 @@ import {
     Slide, 
     Typography
 } from '@material-ui/core';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 import Layout from '../../components/Layout';
 import { Store } from '../../components/Store';
 import getCommerce from '../../utils/commerce';
@@ -21,7 +21,6 @@ import NextLink from 'next/link';
   
   export default function Product(props) {
     const { product } = props;
-    const [quantity, setQuantity] = useState(1);
 
     const classes = useStyles();
 
@@ -42,7 +41,7 @@ import NextLink from 'next/link';
             dispatch({ type: CART_RETRIEVE_SUCCES, payload: cartData.cart });
             Router.push('/cart');
         };
-    };
+    }
 
     return (
       <Layout title={product.name} commercePublicKey={props.commercePublicKey}>
@@ -127,4 +126,4 @@ import NextLink from 'next/link';
         product,
       },
     };
-  };
+  }

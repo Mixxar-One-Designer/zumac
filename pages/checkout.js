@@ -24,6 +24,7 @@ import { Stepper } from '@material-ui/core';
 import { Step, StepLabel, TextField } from '@material-ui/core';
 import { FormControl } from '@material-ui/core';
 import { InputLabel } from '@material-ui/core';
+import process from 'process';
 
 
 const dev = process.env.NODE_ENV === 'development';

@@ -69,4 +69,4 @@ export async function getStaticProps() {
       products,
     },
   };
-};
+}
