@@ -11,7 +11,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Typography,
+  Typography
 } from '@material-ui/core';
 import dynamic from 'next/dynamic';
 import { Alert } from '@material-ui/lab';

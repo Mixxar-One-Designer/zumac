@@ -1,4 +1,4 @@
-import React, { createContext, useReducer } from 'react';
+import { React, createContext, useReducer } from 'react';
 import { CART_RETRIEVE_REQUEST, CART_RETRIEVE_SUCCES, ORDER_SET } from '../utils/constants';
 
 export const Store = createContext();
