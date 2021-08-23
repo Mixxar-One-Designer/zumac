@@ -4,19 +4,11 @@ import {
     Button, 
     Card,  
     CircularProgress, 
-    Grid, 
-    Link, 
+    Grid,  
     List, 
     ListItem, 
     MenuItem, 
-    Select, 
-    Slide, 
-    Table, 
-    TableBody, 
-    TableCell, 
-    TableContainer, 
-    TableHead, 
-    TableRow, 
+    Select,
     Typography
   } from '@material-ui/core';
 import dynamic from 'next/dynamic';
@@ -25,9 +17,7 @@ import { useContext } from 'react';
 import Layout from '../components/Layout';
 import { Store } from '../components/Store';
 import getCommerce from '../utils/commerce';
-import NextLink from 'next/link';
 import { CART_RETRIEVE_SUCCES, ORDER_SET } from '../utils/constants';
-import Router from 'next/dist/server/router';
 import { useStyles } from '../utils/styles';
 import router from 'next/router';
 import { Stepper } from '@material-ui/core';

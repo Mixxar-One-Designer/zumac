@@ -1,3 +1,4 @@
+import React from 'react';
 import '../styles/globals.css'
 import { StoreProvider } from '../components/Store';
 import NProgress from 'nprogress';
