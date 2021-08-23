@@ -40,8 +40,8 @@ import NextLink from 'next/link';
             const cartData = await commerce.cart.add(product.id);
             dispatch({ type: CART_RETRIEVE_SUCCES, payload: cartData.cart });
             Router.push('/cart');
-        };
-    }
+        }
+    };
 
     return (
       <Layout title={product.name} commercePublicKey={props.commercePublicKey}>
