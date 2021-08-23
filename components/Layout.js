@@ -9,7 +9,7 @@ import {
     Typography,
     Box,
     CircularProgress,
-    Badge,
+    Badge
  } from "@material-ui/core";
 import { theme, useStyles } from "../utils/styles";
 import Head from "next/head";
