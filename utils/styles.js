@@ -70,11 +70,19 @@ export const useStyles = makeStyles((theme) => ({
         maxWidth: '50rem',
         width: '100%',
     },
+    smallImage: {
+        maxWidth: '40rem',
+        width: '100%',
+    },
     mt1: {
         marginTop: '1rem !important',
     },
     p1: {
         padding: '1rem !important',
+    },
+    cardMedium: {
+        maxWidth: '10rem',
+        width: '100%',
     },
     formControl: {
         margin: theme.spacing(1),

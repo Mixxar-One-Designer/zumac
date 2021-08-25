@@ -102,7 +102,7 @@ import NextLink from 'next/link';
                                       color="primary"
                                       onClick={addToCartHandler}
                                       >
-                                          Add to cart
+                                          Add to basket
                                       </Button>
                                   </ListItem>
                                   </>

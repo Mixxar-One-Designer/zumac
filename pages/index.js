@@ -13,15 +13,17 @@ import {
 import { Alert } from '@material-ui/lab';
 import Layout from '../components/Layout';
 import getCommerce from '../utils/commerce';
+import { useStyles } from '../utils/styles';
 
 export default function Home(props) {
   const { products } = props;
+  const classes = useStyles();
   return (
     <Layout title="Home" commercePublicKey={props.commercePublicKey}>
-      {products.lenght === 0 && <Alert>No Products Found.</Alert>}
+      {products.length === 0 && <Alert>No Products Found.</Alert>}
       <Grid container spacing={1}>
       {products.map((product) => (
-          <Grid key={product.id} item md={3}>
+          <Grid key={product.id} item md={2} className={classes.cardMedium}>
             <Slide key={product.id} direction="up" in={true}>
             <Card>
               <Link href={`/products/${product.permalink}`}>

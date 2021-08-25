@@ -63,7 +63,7 @@ function Cart(props) {
          (
            <React.Fragment>
              <Typography variant="h1" component="h1">
-               Shopping Cart
+               Shopping Basket 
              </Typography>
              <Slide direction="up" in={true}>
                <Grid container spacing={1}>
@@ -113,7 +113,7 @@ function Cart(props) {
                               <Button 
                               onClick={() => removeFromCartHandler(cartItem)}
                               variant="contained"
-                              color="secondry"
+                              color="secondary"
                               >
                                 x
                               </Button>
