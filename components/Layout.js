@@ -1,4 +1,4 @@
-import  React, { useContext, useEffect, useState } from "react";
+import  React, { useContext, useEffect } from "react";
 import { 
     ThemeProvider, 
     CssBaseline, 
@@ -10,14 +10,12 @@ import {
     Box,
     CircularProgress,
     Badge,
-    IconButton
  } from "@material-ui/core";
 import { theme, useStyles } from "../utils/styles";
 import Head from "next/head";
 import NextLink from 'next/link';
 import getCommerce from "../utils/commerce";
 import { CART_RETRIEVE_REQUEST, CART_RETRIEVE_SUCCES } from "../utils/constants";
-import MenuIcon from '@material-ui/icons/Menu';
 import { Store } from "./Store";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
