@@ -23,7 +23,12 @@ import router from 'next/router';
 import { Stepper } from '@material-ui/core';
 import { Step, StepLabel, TextField } from '@material-ui/core';
 import { FormControl } from '@material-ui/core';
-import { InputLabel } from '@material-ui/core';
+import { 
+  InputLabel,
+  Radio,
+  RadioGroup,
+  FormControlLabel
+} from '@material-ui/core';
 import process from 'process';
 
 
@@ -66,14 +71,6 @@ function Checkout(props) {
   const [shippingStateProvince, setShippingStateProvince] = useState(dev ? 'AR' : '');
   const [shippingCountry, setShippingCountry] = useState(dev ? 'GB': '');
   const [shippingOption, setShippingOption] = useState({});
-   
-  // Payment details
-  const [cardNum, setCardNum] = useState(dev ? '4242424242424242' : '');
-  const [expMonth, setExpMonth] = useState(dev ? '02' : '');
-  const [expYear, setExpYear] = useState(dev ? '24' : '');
-  const [cvv, setCvv] = useState(dev ? '123' : '');
-  const [billingPostalZipCode, setBillingPostalZipCode] = useState(dev ? '94107' : '');
-  const [comment, setComment] = useState(dev ? 'Lorem Ipsum' : '');
 
   // Shipping and fullfilment data
   const [shippingCountries, setShippingCountries] = useState({});
@@ -115,13 +112,9 @@ function Checkout(props) {
         shipping_method: shippingOption,
       },
       payment: {
-        gateway: 'test_gateway',
-        card: {
-        number: '4242424242424242',
-        expiry_month: '02',
-        expiry_year: '24',
-        cvc: '123',
-        postal_zip_code: '94107',
+        gateway: 'manual',
+        manual: {
+          id: 'gway_NoygZG9Z0dqVl8',
         },
       },
     };
@@ -154,6 +147,7 @@ function Checkout(props) {
 
   const [errors, setErrors] = useState([]);
   const [checkoutToken, setCheckoutToken] = useState({});
+  const [paymentMethod, setPaymentMethod] = useState('');
 
   const handleBack = () => {
     setErrors([]);
@@ -370,72 +364,30 @@ function Checkout(props) {
           case 2:
             return (
               <>
-        <TextField 
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        id="cardNum"
-        label="Card Number"
-        name="cardNum"
-        value={cardNum}
-        onChange={(e) => setCardNum(e.target.value)}
-        />
-        <TextField 
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        id="expMonth"
-        label="Expiry Month"
-        name="expMonth"
-        value={expMonth}
-        onChange={(e) => setExpMonth(e.target.value)}
-        />
-        <TextField 
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        id="expYear"
-        label="Expiry Year"
-        name="expYear"
-        value={expYear}
-        onChange={(e) => setExpYear(e.target.value)}
-        />
-        <TextField 
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        id="cvv"
-        label="CVV"
-        name="cvv"
-        value={cvv}
-        onChange={(e) => setCvv(e.target.value)}
-        />
-        <TextField 
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        id="billingPostalZipCode"
-        label="Postal/Zip Code"
-        name="billingPostaZipCode"
-        value={billingPostalZipCode}
-        onChange={(e) => setBillingPostalZipCode(e.target.value)}
-        />
-        <TextField 
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        id="comment"
-        label="Customer Comment"
-        name="comment"
-        value={comment}
-        onChange={(e) => setComment(e.target.value)}
-        />
+     <FormControl component="fieldset">
+              <RadioGroup
+                aria-label="Payment Method"
+                name="paymentMethod"
+                value={paymentMethod}
+                onChange={(e) => setPaymentMethod(e.target.value)}
+              >
+                <FormControlLabel
+                  label="PayPal"
+                  value="PayPal"
+                  control={<Radio />}
+                ></FormControlLabel>
+                <FormControlLabel
+                  label="Stripe"
+                  value="Stripe"
+                  control={<Radio />}
+                ></FormControlLabel>
+                <FormControlLabel
+                  label="Cash"
+                  value="Cash"
+                  control={<Radio />}
+                ></FormControlLabel>
+              </RadioGroup>
+            </FormControl>
       </>
       );
       default:

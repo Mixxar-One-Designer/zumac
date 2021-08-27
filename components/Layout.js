@@ -9,7 +9,7 @@ import {
     Typography,
     Box,
     CircularProgress,
-    Badge,
+    Badge
  } from "@material-ui/core";
 import { theme, useStyles } from "../utils/styles";
 import Head from "next/head";
@@ -18,7 +18,12 @@ import getCommerce from "../utils/commerce";
 import { CART_RETRIEVE_REQUEST, CART_RETRIEVE_SUCCES } from "../utils/constants";
 import { Store } from "./Store";
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-
+import Carousel from 'react-material-ui-carousel';
+import { Paper, Button } from '@material-ui/core';
+import Home from '@material-ui/icons/Home';
+import { InputBase } from "@material-ui/core";
+import { IconButton } from "@material-ui/core";
+import SearchIcon from "@material-ui/icons/Search";
 
 export default function Layout({
     children,
@@ -42,7 +47,7 @@ export default function Layout({
     return (
         <React.Fragment>
             <Head>
-                <meta charset='utf-8' />
+                <meta charSet='utf-8' />
                 <title>{`${title} - Zuma `}</title>
                 <link rel="icon" href="/favicon.ico" />
                 <meta 
@@ -70,6 +75,22 @@ export default function Layout({
                                 Zuma
                             </Link>
                         </NextLink>
+                        <div className={classes.searchSection}>
+                        <form className={classes.searchForm}>
+                            <InputBase
+                            name="query"
+                            className={classes.searchInput}
+                            placeholder="Search products"
+                            />
+                            <IconButton
+                            type="submit"
+                            className={classes.iconButton}
+                            aria-label="search"
+                            >
+                            <SearchIcon />
+                            </IconButton>
+                        </form>
+                        </div>
                         <nav>
                             <NextLink href="/cart">
                                 <Link 
