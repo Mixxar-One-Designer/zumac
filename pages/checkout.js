@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import {
   Box,
-    Button, 
-    Card,  
-    CircularProgress, 
-    Grid,  
-    List, 
-    ListItem, 
-    MenuItem, 
-    Select,
-    Typography
-  } from '@material-ui/core';
+  Button,
+  Card,
+  CircularProgress,
+  Grid,
+  List,
+  ListItem,
+  MenuItem,
+  Select,
+  Typography,
+} from '@material-ui/core';
 import dynamic from 'next/dynamic';
 import { Alert } from '@material-ui/lab';
 import { useContext } from 'react';
@@ -23,53 +23,59 @@ import router from 'next/router';
 import { Stepper } from '@material-ui/core';
 import { Step, StepLabel, TextField } from '@material-ui/core';
 import { FormControl } from '@material-ui/core';
-import { 
+import {
   InputLabel,
   Radio,
   RadioGroup,
-  FormControlLabel
+  FormControlLabel,
 } from '@material-ui/core';
 import process from 'process';
 
-
 const dev = process.env.NODE_ENV === 'development';
 function Checkout(props) {
-    const classes = useStyles();
-    const { state, dispatch } = useContext(Store);
-    const { cart } = state;
+  const classes = useStyles();
+  const { state, dispatch } = useContext(Store);
+  const { cart } = state;
 
-    useEffect(() => {
-      if (!cart.loading) {
-        generateCheckoutToken();
-      }
-    }, [cart.loading]);
+  useEffect(() => {
+    if (!cart.loading) {
+      generateCheckoutToken();
+    }
+  }, [cart.loading]);
 
-    const generateCheckoutToken = async () => {
-      if (cart.data.line_items.length) {
-        const commerce = getCommerce(props.commercePublicKey);
-        const token = await commerce.checkout.generateToken(cart.data.id, {
-          type: 'cart',
-        });
-        setCheckoutToken(token);
-        fetchShippingCountries(token.id);
-      } else {
-        router.push('/cart');
-      }
-    };
+  const generateCheckoutToken = async () => {
+    if (cart.data.line_items.length) {
+      const commerce = getCommerce(props.commercePublicKey);
+      const token = await commerce.checkout.generateToken(cart.data.id, {
+        type: 'cart',
+      });
+      setCheckoutToken(token);
+      fetchShippingCountries(token.id);
+    } else {
+      router.push('/cart');
+    }
+  };
 
-     // Customer details
+  // Customer details
   const [firstName, setFirstName] = useState(dev ? 'Ibrahim' : '');
   const [lastName, setLastName] = useState(dev ? 'Murtala' : '');
   const [email, setEmail] = useState(dev ? 'ibrahimmurtala@email.com' : '');
-  const [tel, setTel] = useState(dev ? '1234567890' : '');
 
   // Shipping Details
-  const [shippingName, setShippingName] = useState(dev ? 'Ibrahim Murtala' : '');
-  const [shippingStreet, setShippingStreet] = useState(dev ? '123 Fake st' : '');
-  const [shippingPostalZipCode, setShippingPostalZipCode] = useState(dev ? '94107' : '');
+  const [shippingName, setShippingName] = useState(
+    dev ? 'Ibrahim Murtala' : ''
+  );
+  const [shippingStreet, setShippingStreet] = useState(
+    dev ? '123 Fake st' : ''
+  );
+  const [shippingPostalZipCode, setShippingPostalZipCode] = useState(
+    dev ? '94107' : ''
+  );
   const [shippingCity, setShippingCity] = useState(dev ? 'Los Angeles' : '');
-  const [shippingStateProvince, setShippingStateProvince] = useState(dev ? 'AR' : '');
-  const [shippingCountry, setShippingCountry] = useState(dev ? 'GB': '');
+  const [shippingStateProvince, setShippingStateProvince] = useState(
+    dev ? 'AR' : ''
+  );
+  const [shippingCountry, setShippingCountry] = useState(dev ? 'GB' : '');
   const [shippingOption, setShippingOption] = useState({});
 
   // Shipping and fullfilment data
@@ -79,11 +85,7 @@ function Checkout(props) {
 
   // Stepper
   const [activeStep, setActiveStep] = React.useState(0);
-  const steps = [
-    'Customer information',
-    'Shipping details',
-    'Payment options',
-  ];
+  const steps = ['Customer information', 'Shipping details', 'Payment options'];
   const handleNext = () => {
     setActiveStep((prevActiveStep) => prevActiveStep + 1);
 
@@ -98,7 +100,6 @@ function Checkout(props) {
         firstname: firstName,
         lastname: lastName,
         email: email,
-        tel: tel,
       },
       shipping: {
         name: shippingName,
@@ -128,8 +129,7 @@ function Checkout(props) {
       localStorage.setItem('order receipt', JSON.stringify(order));
       await refreshCart();
       router.push('/confirmation');
-    }
-    catch(err) {
+    } catch (err) {
       const errList = [err.data.error.message];
       const errs = err.data.error.errors;
       for (const index in errs) {
@@ -137,12 +137,11 @@ function Checkout(props) {
       }
       setErrors(errList);
     }
-  }
+  };
   const refreshCart = async () => {
     const commerce = getCommerce(props.commercePublicKey);
     const newCart = await commerce.cart.refresh();
-    dispatch({ type: CART_RETRIEVE_SUCCES, payload: newCart 
-    });
+    dispatch({ type: CART_RETRIEVE_SUCCES, payload: newCart });
   };
 
   const [errors, setErrors] = useState([]);
@@ -151,7 +150,7 @@ function Checkout(props) {
 
   const handleBack = () => {
     setErrors([]);
-    setActiveStep((prevActiveStep) => prevActiveStep -1);
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
   };
   const handleShippingCountryChange = (e) => {
     const currentValue = e.target.value;
@@ -203,110 +202,101 @@ function Checkout(props) {
     setShippingOptions(options);
     const shippingOption = options[0] ? options[0].id : null;
     setShippingOption(shippingOption);
-  };  
-  
+  };
+
   const getStepContent = (step) => {
     switch (step) {
       case 0:
-        return (<>
-        <TextField 
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        id="firstName"
-        label="First Name"
-        name={firstName}
-        onChange={(e) => setFirstName(e.target.value)}
-        />
-        <TextField 
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        id="lastName"
-        label="Last Name"
-        name={lastName}
-        onChange={(e) => setLastName(e.target.value)}
-        />
-        <TextField 
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        id="email"
-        label="Email"
-        name={email}
-        onChange={(e) => setEmail(e.target.value)}
-        />
-        <TextField 
-        variant="outlined"
-        margin="normal"
-        required
-        fullWidth
-        id="tel"
-        label="Phone Number"
-        name={tel}
-        onChange={(e) => setTel(e.target.value)}
-        />
-        </>
+        return (
+          <>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="firstName"
+              label="Full Name"
+              name={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="lastName"
+              label="Mobile"
+              name={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="Email"
+              name={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </>
         );
-        case 1:
-          return (
-            <>
-            <TextField 
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="shippingName"
-            label="Full Name"
-            name="name"
-            value={shippingName}
-            onChange={(e) => setShippingName(e.target.value)}
+      case 1:
+        return (
+          <>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="shippingName"
+              label="Full Name"
+              name="name"
+              value={shippingName}
+              onChange={(e) => setShippingName(e.target.value)}
             />
-            <TextField 
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="shippingStreet"
-            label="Street"
-            name="address"
-            value={shippingStreet}
-            onChange={(e) => setShippingStreet(e.target.value)}
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="shippingStreet"
+              label="Street"
+              name="address"
+              value={shippingStreet}
+              onChange={(e) => setShippingStreet(e.target.value)}
             />
-            <TextField 
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="shippingCity"
-            label="City"
-            name="city"
-            value={shippingCity}
-            onChange={(e) => setShippingCity(e.target.value)}
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="shippingCity"
+              label="City"
+              name="city"
+              value={shippingCity}
+              onChange={(e) => setShippingCity(e.target.value)}
             />
-            <TextField 
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="shippingPostalZipCode"
-            label="Postal/Zip Code"
-            name="postalCode"
-            value={shippingPostalZipCode}
-            onChange={(e) => setShippingPostalZipCode(e.target.value)}
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="shippingPostalZipCode"
+              label="Postal/Zip Code"
+              name="postalCode"
+              value={shippingPostalZipCode}
+              onChange={(e) => setShippingPostalZipCode(e.target.value)}
             />
             <FormControl className={classes.formControl}>
               <InputLabel id="shippingCountry-label">Country</InputLabel>
-              <Select 
-              labelId="shippingCountry-label"
-              id="shppingCountry"
-              label="Country"
-              fullWidth
-              onChange={handleShippingCountryChange}
-              value={shippingCountry}
+              <Select
+                labelId="shippingCountry-label"
+                id="shppingCountry"
+                label="Country"
+                fullWidth
+                onChange={handleShippingCountryChange}
+                value={shippingCountry}
               >
                 {Object.keys(shippingCountries).map((index) => (
                   <MenuItem value={index} key={index}>
@@ -320,14 +310,14 @@ function Checkout(props) {
                 State / Province
               </InputLabel>
               <Select
-              labelId="shippingStateProvince-label" 
-              id="shppingStateProvince"
-              label="State/Province"
-              fullWidth
-              onChange={handleSubdivisionChange}
-              value={shippingStateProvince}
-              required
-              className={classes.mt1}
+                labelId="shippingStateProvince-label"
+                id="shppingStateProvince"
+                label="State/Province"
+                fullWidth
+                onChange={handleSubdivisionChange}
+                value={shippingStateProvince}
+                required
+                className={classes.mt1}
               >
                 {Object.keys(shippingSubdivisions).map((index) => (
                   <MenuItem value={index} key={index}>
@@ -339,32 +329,29 @@ function Checkout(props) {
             <FormControl className={classes.formControl}>
               <InputLabel id="shippingOption-label">Shipping Option</InputLabel>
 
-              <Select 
-              labelId="shippingOption-label"
-              id="shippingOption"
-              label="Shipping Option"
-              fullWidth
-              onChange={handleShippingOptionChange}
-              value={shippingOption}
-              required
-              className={classes.mt1}
+              <Select
+                labelId="shippingOption-label"
+                id="shippingOption"
+                label="Shipping Option"
+                fullWidth
+                onChange={handleShippingOptionChange}
+                value={shippingOption}
+                required
+                className={classes.mt1}
               >
                 {shippingOptions.map((method, index) => (
-                  <MenuItem 
-                  value={method.id} 
-                  key={index}
-                  >
+                  <MenuItem value={method.id} key={index}>
                     {`${method.description} - $${method.price.formatted_with_code}`}
                   </MenuItem>
                 ))}
               </Select>
             </FormControl>
-            </>
-          );
-          case 2:
-            return (
-              <>
-     <FormControl component="fieldset">
+          </>
+        );
+      case 2:
+        return (
+          <>
+            <FormControl component="fieldset">
               <RadioGroup
                 aria-label="Payment Method"
                 name="paymentMethod"
@@ -372,51 +359,41 @@ function Checkout(props) {
                 onChange={(e) => setPaymentMethod(e.target.value)}
               >
                 <FormControlLabel
-                  label="PayPal"
-                  value="PayPal"
-                  control={<Radio />}
-                ></FormControlLabel>
-                <FormControlLabel
-                  label="Stripe"
-                  value="Stripe"
-                  control={<Radio />}
-                ></FormControlLabel>
-                <FormControlLabel
-                  label="Cash"
+                  label="Cash on delivery"
                   value="Cash"
                   control={<Radio />}
                 ></FormControlLabel>
               </RadioGroup>
             </FormControl>
-      </>
-      );
+          </>
+        );
       default:
         return 'Unknown step';
     }
-  }
+  };
 
-    return (
-      <Layout title="Home" commercePublicKey={props.commercePublicKey}>
+  return (
+    <Layout title="Home" commercePublicKey={props.commercePublicKey}>
       <Typography gutterBottom variant="h6" color="textPrimary" component="h1">
-          Checkout
-        </Typography>
-        {cart.loading ? (
-          <CircularProgress />
-        ) :(
-          <Grid container spacing={2}>
-            <Grid item md={8}>
-              <Card className={classes.p1}>
-                <form>
-                  <Stepper activeStep={activeStep} alternativeLabel>
-                    {steps.map((label) => (
-                      <Step key={label}>
-                        <StepLabel>{label}</StepLabel>
-                      </Step>
-                    ))}
-                  </Stepper>
-                  <Box>
-                    {activeStep === steps.length ?
-                    errors && errors.length > 0 ?(
+        Checkout
+      </Typography>
+      {cart.loading ? (
+        <CircularProgress />
+      ) : (
+        <Grid container spacing={2}>
+          <Grid item md={8}>
+            <Card className={classes.p1}>
+              <form>
+                <Stepper activeStep={activeStep} alternativeLabel>
+                  {steps.map((label) => (
+                    <Step key={label}>
+                      <StepLabel>{label}</StepLabel>
+                    </Step>
+                  ))}
+                </Stepper>
+                <Box>
+                  {activeStep === steps.length ? (
+                    errors && errors.length > 0 ? (
                       <Box>
                         <List>
                           {errors.map((error) => (
@@ -426,91 +403,91 @@ function Checkout(props) {
                           ))}
                         </List>
                         <Box className={classes.mt1}>
-                          <Button 
-                          onClick={handleBack}
-                          className={classes.button}
+                          <Button
+                            onClick={handleBack}
+                            className={classes.button}
                           >
                             Back
                           </Button>
                         </Box>
-                        </Box>
-                    ) : 
-                    (
-                      <Box>
-                        <CircularProgress />
-                        <Typography className={classes.instructions}>
-                          Comfirming Order...
-                        </Typography>
                       </Box>
                     ) : (
                       <Box>
-                        {getStepContent(activeStep)}
-                        <Box className={classes.mt1}>
-                          <Button
+                        <CircularProgress />
+                        <Typography className={classes.instructions}>
+                          Confirming Order...
+                        </Typography>
+                      </Box>
+                    )
+                  ) : (
+                    <Box>
+                      {getStepContent(activeStep)}
+                      <Box className={classes.mt1}>
+                        <Button
                           disabled={activeStep === 0}
                           onClick={handleBack}
                           className={classes.button}
-                          >
-                            Back
-                          </Button>
-                          <Button 
+                        >
+                          Back
+                        </Button>
+                        <Button
                           variant="contained"
                           color="primary"
                           onClick={handleNext}
                           className={classes.button}
-                          >
-                            {activeStep === steps.length - 1
+                        >
+                          {activeStep === steps.length - 1
                             ? 'Confirm Order'
                             : 'Next'}
-                          </Button>
-                        </Box>
+                        </Button>
                       </Box>
-                    )}
-                  </Box>
-                </form>
-              </Card>
-            </Grid>
-            <Grid item md={4}>
-              <Card>
-                <List>
-                  <ListItem>
-                    <Typography variant="h2">Order summary</Typography>
-                  </ListItem>
-                  {cart.data.line_items.map(((lineItem) => (
-                    <ListItem key={lineItem.id}>
-                      <Grid container>
-                        <Grid xs={6} item>
-                          {lineItem.quantity} x {lineItem.name}
-                        </Grid>
-                        <Grid xs={6} item>
-                          <Typography align="right">
-                            {lineItem.line_total.formatted_with_symbol}
-                          </Typography>
-                        </Grid>
-                      </Grid>
-                    </ListItem>
-                  )))}
-                  <ListItem>
+                    </Box>
+                  )}
+                </Box>
+              </form>
+            </Card>
+          </Grid>
+          <Grid item md={4}>
+            <Card>
+              <List>
+                <ListItem>
+                  <Typography variant="h2">Order summary</Typography>
+                </ListItem>
+                {cart.data.line_items.map((lineItem) => (
+                  <ListItem key={lineItem.id}>
                     <Grid container>
                       <Grid xs={6} item>
-                        Subtotal
+                        {lineItem.quantity} x {lineItem.name}
                       </Grid>
                       <Grid xs={6} item>
                         <Typography align="right">
-                          {cart.data.subtotal.formatted_with_symbol}
+                          {lineItem.line_total.formatted_with_symbol}
                         </Typography>
                       </Grid>
                     </Grid>
                   </ListItem>
-                </List>
-              </Card>
-            </Grid>
+                ))}
+                <ListItem>
+                  <Grid container>
+                    <Grid xs={6} item>
+                      Subtotal
+                    </Grid>
+                    <Grid xs={6} item>
+                      <Typography align="right">
+                        {cart.data.subtotal.formatted_with_symbol}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+                </ListItem>
+              </List>
+            </Card>
           </Grid>
-        )}
-      </Layout>
-    );
-  }
-  
+        </Grid>
+      )}
+    </Layout>
+  );
+}
+
 export default dynamic(() => Promise.resolve(Checkout), {
   ssr: false,
 });

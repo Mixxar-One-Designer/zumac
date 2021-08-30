@@ -11,7 +11,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Typography
+  Typography,
 } from '@material-ui/core';
 import dynamic from 'next/dynamic';
 import { Alert } from '@material-ui/lab';
@@ -26,9 +26,7 @@ function Confirmation(props) {
   const { order } = state;
 
   return (
-    <Layout
-      title="Order receipt" commercePublicKey={props.commercePublicKey}
-    >
+    <Layout title="Order receipt" commercePublicKey={props.commercePublicKey}>
       {!order ? (
         <Alert icon={false} severity="error">
           No order found.
@@ -72,11 +70,7 @@ function Confirmation(props) {
                         {order.transactions[0].gateway_name}
                       </Typography>
                       <Typography>
-                        Card ending in {order.transactions[0].gateway_reference}
-                      </Typography>
-                      <Typography>
-                        Transaction ID:{' '}
-                        {order.transactions[0].gateway_transaction_id}
+                        {order.transactions[0].gateway_reference}
                       </Typography>
                     </>
                   ) : (
