@@ -359,7 +359,7 @@ function Checkout(props) {
                 onChange={(e) => setPaymentMethod(e.target.value)}
               >
                 <FormControlLabel
-                  label="Cash on delivery"
+                  label="Cash on delivery or Bank Transfer"
                   value="Cash"
                   control={<Radio />}
                 ></FormControlLabel>

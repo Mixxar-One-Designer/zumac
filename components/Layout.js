@@ -21,6 +21,11 @@ import {
 } from '../utils/constants';
 import { Store } from './Store';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import { YouTube } from '@material-ui/icons';
+import FacebookIcon from '@material-ui/icons/Facebook';
+import CallIcon from '@material-ui/icons/Call';
+import MailIcon from '@material-ui/icons/Mail';
 
 export default function Layout({
   children,
@@ -99,8 +104,39 @@ export default function Layout({
         <Container maxWidth="md" component="footer">
           <Box mt={5}>
             <Typography variant="body2" color="default" align="center">
-              &copy; Copyright Zuma.com, inc. 2021 All right reserved
-              {'.'}
+              <h3>Contact Us</h3>
+              <CallIcon>Call</CallIcon>
+              <Typography>0704-6768-448</Typography>
+              <MailIcon>Mail</MailIcon>
+              <Typography>zumainc@gmail.com</Typography>
+              <Link
+                href="https://web.facebook.com/Zumacom-Inc-101002112030988"
+                variant="button"
+                color="textPrimary"
+                className={classes.link}
+              >
+                <FacebookIcon>Facebook</FacebookIcon>
+              </Link>
+              <Link
+                href="https://www.instagram.com/zuma_inc/"
+                variant="button"
+                color="textPrimary"
+                className={classes.link}
+              >
+                <InstagramIcon>Instagram</InstagramIcon>
+              </Link>
+              <Link
+                href="https://www.youtube.com/channel/UCqp9U3x5p0efx_ObtIqmtww"
+                variant="button"
+                color="textPrimary"
+                className={classes.link}
+              >
+                <YouTube>YouTube</YouTube>
+              </Link>
+              <Typography>
+                &copy; Copyright Zuma Inc. 2021 All right reserved
+                {'.'}
+              </Typography>
             </Typography>
           </Box>
         </Container>
