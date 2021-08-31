@@ -14,26 +14,8 @@ import { Alert } from '@material-ui/lab';
 import Layout from '../components/Layout';
 import getCommerce from '../utils/commerce';
 import { useStyles } from '../utils/styles';
-import algoliasearch from 'algoliasearch';
-import {
-  InstantSearch,
-  Hits,
-  ToggleRefinement,
-  RefinementList,
-} from 'react-instantsearch-dom';
 import Carousel from 'react-material-ui-carousel';
 import NextLink from 'next/link';
-
-const client = algoliasearch(
-  // eslint-disable-next-line no-undef
-  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
-  // eslint-disable-next-line no-undef
-  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY
-);
-
-function Product({ hit }) {
-  return <pre>{JSON.stringify(hit, null, 2)}</pre>;
-}
 
 export default function Home(props) {
   const { products } = props;
@@ -48,40 +30,27 @@ export default function Home(props) {
             passHref
           >
             <Link>
-              <h1>Stock Products</h1>
-              <img
-                src={product.media.source}
-                alt={product.name}
-                className={classes.small}
-              ></img>
+              <h1
+                className="font-size-display1 mt-5 text-center mx-auto text-uppercase"
+                style={{ maxWidth: '53rem' }}
+                align="center"
+              >
+                Welcome to zuma.com the earth biggest online mobile store.
+              </h1>
+              <h3 align="center"> Enjoy a 10% discount on all oders.</h3>
+              <img className={classes.small}></img>
               <Typography
                 gutterBottom
                 variant="body2"
                 color="textPrimary"
                 component="p"
-              >
-                {product.name}
-              </Typography>
+              ></Typography>
             </Link>
           </NextLink>
         ))}
       </Carousel>
       {products.length === 0 && <Alert>No Products Found.</Alert>}
-      <>
-        <h1>Categories</h1>
-
-        <InstantSearch searchClient={client} indexName="products">
-          <ToggleRefinement
-            attribute="has degital delivery"
-            label="Ebooks"
-            value={true}
-          />
-
-          <RefinementList atrribute="categories.name" />
-
-          <Hits hitComponent={Product} />
-        </InstantSearch>
-      </>
+      <h1>Stock Products</h1>
       <Grid container spacing={1}>
         {products.map((product) => (
           <Grid key={product.id} item md={2} className={classes.cardMedium}>
