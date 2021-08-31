@@ -1,7 +1,9 @@
 import algoliasearch from 'algoliasearch';
 
 const client = algoliasearch(
+  // eslint-disable-next-line no-undef
   process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
+  // eslint-disable-next-line no-undef
   process.env.ALGOLIA_ADMIN_API_KEY
 );
 

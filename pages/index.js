@@ -25,7 +25,9 @@ import Carousel from 'react-material-ui-carousel';
 import NextLink from 'next/link';
 
 const client = algoliasearch(
+  // eslint-disable-next-line no-undef
   process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
+  // eslint-disable-next-line no-undef
   process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY
 );
 
