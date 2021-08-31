@@ -457,7 +457,7 @@ function Checkout(props) {
                   <ListItem key={lineItem.id}>
                     <Grid container>
                       <Grid xs={6} item>
-                        {lineItem.quantity} x {lineItem.name}
+                        {lineItem.inventory_managed} x {lineItem.name}
                       </Grid>
                       <Grid xs={6} item>
                         <Typography align="right">

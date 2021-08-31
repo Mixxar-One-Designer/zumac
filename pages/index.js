@@ -14,13 +14,72 @@ import { Alert } from '@material-ui/lab';
 import Layout from '../components/Layout';
 import getCommerce from '../utils/commerce';
 import { useStyles } from '../utils/styles';
+import algoliasearch from 'algoliasearch';
+import {
+  InstantSearch,
+  Hits,
+  ToggleRefinement,
+  RefinementList,
+} from 'react-instantsearch-dom';
+import Carousel from 'react-material-ui-carousel';
+import NextLink from 'next/link';
+
+const client = algoliasearch(
+  process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
+  process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY
+);
+
+function Product({ hit }) {
+  return <pre>{JSON.stringify(hit, null, 2)}</pre>;
+}
 
 export default function Home(props) {
   const { products } = props;
   const classes = useStyles();
   return (
     <Layout title="Home" commercePublicKey={props.commercePublicKey}>
+      <Carousel className={classes.mt1} animation="slide">
+        {products.map((product) => (
+          <NextLink
+            key={product._id}
+            href={`/products/${product.permalink}`}
+            passHref
+          >
+            <Link>
+              <h1>Stock Products</h1>
+              <img
+                src={product.media.source}
+                alt={product.name}
+                className={classes.small}
+              ></img>
+              <Typography
+                gutterBottom
+                variant="body2"
+                color="textPrimary"
+                component="p"
+              >
+                {product.name}
+              </Typography>
+            </Link>
+          </NextLink>
+        ))}
+      </Carousel>
       {products.length === 0 && <Alert>No Products Found.</Alert>}
+      <>
+        <h1>Categories</h1>
+
+        <InstantSearch searchClient={client} indexName="products">
+          <ToggleRefinement
+            attribute="has degital delivery"
+            label="Ebooks"
+            value={true}
+          />
+
+          <RefinementList atrribute="categories.name" />
+
+          <Hits hitComponent={Product} />
+        </InstantSearch>
+      </>
       <Grid container spacing={1}>
         {products.map((product) => (
           <Grid key={product.id} item md={2} className={classes.cardMedium}>
