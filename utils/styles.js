@@ -70,7 +70,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   smallImage: {
-    maxWidth: '40rem',
+    maxWidth: '30rem',
     width: '100%',
   },
   small: {

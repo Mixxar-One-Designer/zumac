@@ -96,9 +96,11 @@ export default function Home(props) {
 export async function getStaticProps() {
   const commerce = getCommerce();
   const { data: products } = await commerce.products.list();
+  const { data: categories } = await commerce.categories.list();
   return {
     props: {
       products,
+      categories,
     },
   };
 }
