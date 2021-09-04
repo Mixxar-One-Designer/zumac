@@ -49,7 +49,7 @@ export default function Layout({
     <React.Fragment>
       <Head>
         <meta charSet="utf-8" />
-        <title>{`${title} - Zuma `}</title>
+        <title>{`${title} - Zuma Express `}</title>
         <link rel="icon" href="/favicon.ico" />
         <meta
           name="viewport"
@@ -73,7 +73,7 @@ export default function Layout({
                 href="/"
                 className={classes.toolbarTitle}
               >
-                Zuma
+                ZumaExpress
               </Link>
             </NextLink>
             <nav>

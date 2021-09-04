@@ -35,7 +35,7 @@ export default function Home(props) {
                 style={{ maxWidth: '53rem' }}
                 align="center"
               >
-                Welcome to zuma.com the earth biggest online mobile store.
+                Welcome to zuma Express the earth biggest online mobile store.
               </h1>
               <h3 align="center"> Enjoy a 10% discount on all oders.</h3>
               <img className={classes.small}></img>
