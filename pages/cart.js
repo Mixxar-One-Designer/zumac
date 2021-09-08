@@ -79,7 +79,7 @@ function Cart(props) {
                     </TableHead>
                     <TableBody>
                       {cart.data.line_items.map((cartItem) => (
-                        <TableRow key={cartItem.image}>
+                        <TableRow key={cartItem.name}>
                           <TableCell component="th" scope="row">
                             {cartItem.name}
                           </TableCell>

@@ -20,6 +20,7 @@ import NextLink from 'next/link';
 export default function Home(props) {
   const { products } = props;
   const classes = useStyles();
+
   return (
     <Layout title="Home" commercePublicKey={props.commercePublicKey}>
       <Carousel className={classes.mt1} animation="slide">
@@ -37,7 +38,6 @@ export default function Home(props) {
               >
                 Welcome to zuma Express the earth biggest online mobile store.
               </h1>
-              <h3 align="center"> Enjoy a 10% discount on all oders.</h3>
               <img className={classes.small}></img>
               <Typography
                 gutterBottom
