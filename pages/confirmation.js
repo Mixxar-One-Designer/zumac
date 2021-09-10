@@ -34,6 +34,10 @@ function Confirmation(props) {
       ) : (
         <React.Fragment>
           <Typography variant="h1" component="h1">
+            <Typography>
+              {' '}
+              Thanks for your oder, Check your gmail for payment.
+            </Typography>
             Order receipt. Order ID: {order.id}
           </Typography>
           <Slide direction="up" in={true}>

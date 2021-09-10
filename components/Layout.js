@@ -106,9 +106,9 @@ export default function Layout({
             <Typography variant="body2" color="default" align="center">
               <h3>Contact Us</h3>
               <CallIcon>Call</CallIcon>
-              <Typography>0704-6768-448</Typography>
+              <Typography>070-8104-0971</Typography>
               <MailIcon>Mail</MailIcon>
-              <Typography>zumainc@gmail.com</Typography>
+              <Typography>zumaexpress1@gmail.com</Typography>
               <Link
                 href="https://web.facebook.com/Zumacom-Inc-101002112030988"
                 variant="button"

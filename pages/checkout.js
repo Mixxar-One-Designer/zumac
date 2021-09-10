@@ -115,7 +115,7 @@ function Checkout(props) {
       payment: {
         gateway: 'manual',
         manual: {
-          id: 'gway_NoygZG9Z0dqVl8',
+          id: 'gway_KwbeE20E6p8xl3',
         },
       },
     };
@@ -359,7 +359,7 @@ function Checkout(props) {
                 onChange={(e) => setPaymentMethod(e.target.value)}
               >
                 <FormControlLabel
-                  label="Cash on delivery or Bank Transfer"
+                  label="Bank Transfer"
                   value="Cash"
                   control={<Radio />}
                 ></FormControlLabel>
