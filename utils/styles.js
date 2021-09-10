@@ -88,7 +88,7 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   cardMedium: {
-    maxWidth: '8rem',
+    maxWidth: '10rem',
     width: '100%',
   },
   formControl: {

@@ -36,7 +36,7 @@ function Confirmation(props) {
           <Typography variant="h1" component="h1">
             <Typography>
               {' '}
-              Thanks for your oder, Check your gmail for payment.
+              Thanks for your order, Check your email for payment details.
             </Typography>
             Order receipt. Order ID: {order.id}
           </Typography>
