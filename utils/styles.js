@@ -83,6 +83,10 @@ export const useStyles = makeStyles((theme) => ({
   p1: {
     padding: '1rem !important',
   },
+  btn: {
+    maxWidth: '5rem',
+    width: '100%',
+  },
   cardMedium: {
     maxWidth: '10rem',
     width: '100%',
