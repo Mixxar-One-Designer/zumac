@@ -1,14 +1,12 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import {
   Box,
-  Button,
   Card,
   CardActionArea,
   CardContent,
   CardMedia,
   Grid,
   Link,
-  ListItem,
   Slide,
   Typography,
 } from '@material-ui/core';
@@ -18,33 +16,10 @@ import getCommerce from '../utils/commerce';
 import { useStyles } from '../utils/styles';
 import Carousel from 'react-material-ui-carousel';
 import NextLink from 'next/link';
-import { CART_RETRIEVE_SUCCES } from '../utils/constants';
-import { Router } from '@material-ui/icons';
-import { Store } from '../components/Store';
 
 export default function Home(props) {
   const { products } = props;
-  const { product } = props;
   const classes = useStyles();
-
-  const { state, dispatch } = useContext(Store);
-  const { cart } = state;
-
-  const addToCartHandler = async () => {
-    const commerce = getCommerce(props.commercePublicKey);
-    const lineItem = cart.data.line_items.find(
-      (x) => x.product_id === product.id
-    );
-    if (lineItem) {
-      const cartData = await commerce.cart.update(lineItem.id);
-      dispatch({ type: CART_RETRIEVE_SUCCES, payload: cartData.cart });
-      Router.push('/cart');
-    } else {
-      const cartData = await commerce.cart.add(product.id);
-      dispatch({ type: CART_RETRIEVE_SUCCES, payload: cartData.cart });
-      Router.push('/cart');
-    }
-  };
 
   return (
     <Layout title="Home" commercePublicKey={props.commercePublicKey}>
@@ -109,20 +84,6 @@ export default function Home(props) {
                     </CardContent>
                   </CardActionArea>
                 </Link>
-                <>
-                  <ListItem>
-                    <Button
-                      className={classes.btn}
-                      type="button"
-                      fullWidth
-                      variant="contained"
-                      color="primary"
-                      onClick={addToCartHandler}
-                    >
-                      Add to basket
-                    </Button>
-                  </ListItem>
-                </>
               </Card>
             </Slide>
           </Grid>
