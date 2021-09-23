@@ -15,7 +15,6 @@ import Layout from '../components/Layout';
 import getCommerce from '../utils/commerce';
 import { useStyles } from '../utils/styles';
 import Carousel from 'react-material-ui-carousel';
-import NextLink from 'next/link';
 
 export default function Home(props) {
   const { products } = props;
@@ -24,31 +23,7 @@ export default function Home(props) {
   return (
     <Layout title="Home" commercePublicKey={props.commercePublicKey}>
       <Carousel className={classes.mt1} animation="slide">
-        {products.map((product) => (
-          <NextLink
-            key={product._id}
-            href={`/products/${product.permalink}`}
-            passHref
-          >
-            <Link>
-              <h1
-                className="font-size-display1 mt-5 text-center mx-auto text-uppercase"
-                style={{ maxWidth: '53rem' }}
-                align="center"
-              >
-                Welcome to zuma Express the best one click user friendly
-                shopping exprience.
-              </h1>
-              <img className={classes.small}></img>
-              <Typography
-                gutterBottom
-                variant="body2"
-                color="textPrimary"
-                component="p"
-              ></Typography>
-            </Link>
-          </NextLink>
-        ))}
+        <h1> Welcome to Zuma Express </h1>
       </Carousel>
       {products.length === 0 && <Alert>No Products Found.</Alert>}
       <h1>Stock Products</h1>
