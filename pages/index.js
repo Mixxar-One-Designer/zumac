@@ -16,17 +16,42 @@ import getCommerce from '../utils/commerce';
 import { useStyles } from '../utils/styles';
 import Carousel from 'react-material-ui-carousel';
 
-export default function Home(props) {
-  const { products } = props;
+export default function HomePage(props) {
+  const { products, categories } = props;
   const classes = useStyles();
 
   return (
-    <Layout title="Home" commercePublicKey={props.commercePublicKey}>
+    <Layout title="HomePage" commercePublicKey={props.commercePublicKey}>
       <Carousel className={classes.mt1} animation="slide">
         <h1> Welcome to Zuma Express </h1>
       </Carousel>
       {products.length === 0 && <Alert>No Products Found.</Alert>}
       <h1>Stock Products</h1>
+      <Grid container spacing={2}>
+        {categories.map((category) => (
+          <Slide key={category.id} item md={2} className={classes.mid}>
+            <Link href={`/categories/${category.permalink}`}>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  alt={category.name}
+                  image={category.media.source}
+                />
+                <CardContent>
+                  <Typography
+                    gutterBottom
+                    variant="body2"
+                    color="textPrimary"
+                    component="p"
+                  >
+                    {category.name}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
+            </Link>
+          </Slide>
+        ))}
+      </Grid>
       <Grid container spacing={1}>
         {products.map((product) => (
           <Grid key={product.id} item md={2} className={classes.cardMedium}>
