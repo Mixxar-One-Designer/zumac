@@ -1,7 +1,5 @@
 import algoliasearch from 'algoliasearch';
 
-const process = Node.process;
-
 const client = algoliasearch(
   process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
   process.env.ALGOLIA_ADMIN_API_KEY
@@ -33,7 +31,7 @@ export default async (req, res) => {
     }
 
     res.status(422).json({ message: `${trigger} is not a valid trigger` });
-  } catch ({ message = 'something went wrong' }) {
+  } catch ({ message = 'Something went wrong' }) {
     res.status(500).json({ message });
   }
 };
