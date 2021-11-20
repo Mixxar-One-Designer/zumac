@@ -81,6 +81,7 @@ export const useStyles = makeStyles((theme) => ({
     marginTop: '1rem !important',
   },
   Image: {
+    marginTop: '1rem',
     image: 'banner.jpg',
   },
   p1: {
