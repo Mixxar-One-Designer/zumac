@@ -126,7 +126,6 @@ function Checkout(props) {
         orderData
       );
       dispatch({ type: ORDER_SET, payload: order });
-      // eslint-disable-next-line no-undef
       localStorage.setItem('order receipt', JSON.stringify(order));
       await refreshCart();
       router.push('/confirmation');

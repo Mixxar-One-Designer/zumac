@@ -1,4 +1,3 @@
-/* eslint-disable no-undef */
 import React from 'react';
 import '../styles/globals.css';
 import { StoreProvider } from '../components/Store';

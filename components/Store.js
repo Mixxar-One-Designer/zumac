@@ -31,12 +31,9 @@ function reducer(state, action) {
 const initialState = {
   cart: { loading: true },
   order:
-    // eslint-disable-next-line no-undef
     typeof window !== 'undefined' &&
-    // eslint-disable-next-line no-undef
     window.localStorage.getItem('order_receipt')
-      ? // eslint-disable-next-line no-undef
-        JSON.parse(window.localStorage.getItem('order_receipt'))
+      ? JSON.parse(window.localStorage.getItem('order_receipt'))
       : null,
 };
 export function StoreProvider(props) {

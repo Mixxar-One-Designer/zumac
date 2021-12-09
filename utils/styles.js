@@ -80,11 +80,9 @@ export const useStyles = makeStyles((theme) => ({
   mt1: {
     marginTop: '1rem !important',
   },
-  Image: {
-    marginTop: '1rem',
-    maxWidth: '35rem',
+  banner: {
+    maxWidth: '30rem',
     width: '100%',
-    image: 'banner.jpg',
   },
   p1: {
     padding: '1rem !important',

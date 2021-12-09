@@ -1,11 +1,4 @@
 import React from 'react';
-import algoliasearch from 'algoliasearch';
-import {
-  InstantSearch,
-  Hits,
-  ToggleRefinement,
-  RefinementList,
-} from 'react-instantsearch-dom';
 import {
   Box,
   Card,
@@ -27,41 +20,20 @@ export default function HomePage(props) {
   const { products, categories } = props;
   const classes = useStyles();
 
-  const client = algoliasearch(
-    process.env.NEXT_PUBLIC_ALGOLIA_APP_ID,
-    process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY
-  );
-
-  function Product({ hit }) {
-    return <pre>{JSON.stringify(hit, null, 2)}</pre>;
-  }
-
   return (
     <Layout title="HomePage" commercePublicKey={props.commercePublicKey}>
       <Carousel className={classes.mt1} animation="slide">
         <CardActionArea>
-          <CardMedia component="img" alt="Banner" image="/images/banner.jpg" />
+          <CardMedia
+            className={classes.banner}
+            component="img"
+            align="center"
+            alt="Banner"
+            image="/images/banner.jpg"
+          />
         </CardActionArea>
       </Carousel>
-      <>
-        <InstantSearch searchClient={client} indexName="products">
-          <div className="md:w-1/4 px-6">
-            <h4 className="mt-6 text-sm uppercase tracking-wide font-medium text-gray-400">
-              Delivery
-            </h4>
-            <ToggleRefinement
-              attribute="has.diital_delivery"
-              label="Digital Delivery"
-              value={true}
-            />
-            <h4 className="mt-6 text-sm uppercase tracking-wide font-medium text-gray-400">
-              Categories
-            </h4>
-            <RefinementList attribute="categories.name" />
-          </div>
-          <Hits hitComponent={Product} />
-        </InstantSearch>
-      </>
+
       {products.length === 0 && <Alert>No Products Found.</Alert>}
       <Grid container spacing={2}>
         {categories.map((category) => (
