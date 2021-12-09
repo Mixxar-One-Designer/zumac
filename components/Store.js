@@ -1,38 +1,46 @@
 import { React, createContext, useReducer } from 'react';
-import { CART_RETRIEVE_REQUEST, CART_RETRIEVE_SUCCES, ORDER_SET } from '../utils/constants';
+import {
+  CART_RETRIEVE_REQUEST,
+  CART_RETRIEVE_SUCCES,
+  ORDER_SET,
+} from '../utils/constants';
 
 export const Store = createContext();
 
 function reducer(state, action) {
-    switch (action.type) {
-        case CART_RETRIEVE_REQUEST:
-            return {
-                ...state,
-                cart: { loading: true },
-            };
-            case CART_RETRIEVE_SUCCES:
-                return {
-                    ...state,
-                    cart: { loading: false, data: action.payload },
-                };
-                case ORDER_SET:
-                return {
-                    ...state,
-                    order: action.payload,
-                };
-        default:
-            return state;
-    }
+  switch (action.type) {
+    case CART_RETRIEVE_REQUEST:
+      return {
+        ...state,
+        cart: { loading: true },
+      };
+    case CART_RETRIEVE_SUCCES:
+      return {
+        ...state,
+        cart: { loading: false, data: action.payload },
+      };
+    case ORDER_SET:
+      return {
+        ...state,
+        order: action.payload,
+      };
+    default:
+      return state;
+  }
 }
 const initialState = {
-    cart: { loading: true }, 
-    order: 
-    typeof window !== 'undefined' && window.localStorage.getItem('order_receipt')
-    ? JSON.parse(window.localStorage.getItem('order_receipt'))
-    : null,
+  cart: { loading: true },
+  order:
+    // eslint-disable-next-line no-undef
+    typeof window !== 'undefined' &&
+    // eslint-disable-next-line no-undef
+    window.localStorage.getItem('order_receipt')
+      ? // eslint-disable-next-line no-undef
+        JSON.parse(window.localStorage.getItem('order_receipt'))
+      : null,
 };
 export function StoreProvider(props) {
-    const [state, dispatch] = useReducer(reducer, initialState);
-    const value = { state, dispatch }; 
-    return <Store.Provider value={value}>{props.children}</Store.Provider>;
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const value = { state, dispatch };
+  return <Store.Provider value={value}>{props.children}</Store.Provider>;
 }
