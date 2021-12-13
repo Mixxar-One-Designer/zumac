@@ -70,11 +70,11 @@ export const useStyles = makeStyles((theme) => ({
     width: '100%',
   },
   smallImage: {
-    maxWidth: '20rem',
+    maxWidth: '30rem',
     width: '100%',
   },
   small: {
-    maxWidth: '10rem',
+    maxWidth: '30rem',
     width: '100%',
   },
   mt1: {
@@ -95,36 +95,30 @@ export const useStyles = makeStyles((theme) => ({
     maxWidth: '10rem',
     width: '100%',
   },
-  formControl: {
-    margin: theme.spacing(1),
-    minWidth: 120,
+  section: {
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  form: {
+    width: '100%',
+    maxWidth: 800,
+    margin: '0 auto',
+  },
+  navbarButton: {
+    color: '#ffffff',
+    textTransform: 'initial',
+  },
+  transparentBackgroud: {
+    backgroundColor: 'transparent',
+  },
+  error: {
+    color: '#f04040',
+  },
+  fullWidth: {
     width: '100%',
   },
-  searchSection: {
-    display: 'none',
-    [theme.breakpoints.up('md')]: {
-      display: 'flex',
-    },
-  },
-  searchForm: {
-    border: '1px solid #ffffff',
-    backgroundColor: '#ffffff',
-    borderRadius: 5,
+  reviewForm: {
+    maxWidth: 800,
     width: '100%',
-  },
-  searchInput: {
-    paddingLeft: 5,
-    color: '#000000',
-    '& ::placeholder': {
-      color: '#606060',
-    },
-  },
-  iconButton: {
-    backgroundColor: '#f8c040',
-    padding: 5,
-    borderRadius: '0 5px 5px 0',
-    '& span': {
-      color: '#000000',
-    },
   },
 }));
