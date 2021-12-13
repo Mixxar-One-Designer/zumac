@@ -63,42 +63,44 @@ export default function HomePage(props) {
       <Typography variant="h2">Popular Products</Typography>
 
       {products.length === 0 && <Alert>No Products Found.</Alert>}
-      {products.map((product) => (
-        <Grid key={product.id} item md={2} className={classes.cardMedium}>
+      <Grid container spacing={1}>
+        {products.map((product) => (
           <Slide key={product.id} direction="up" in={true}>
-            <Card>
-              <Link href={`/products/${product.permalink}`}>
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    alt={product.name}
-                    image={product.media.source}
-                  />
-                  <CardContent>
-                    <Typography
-                      gutterBottom
-                      variant="body2"
-                      color="textPrimary"
-                      component="p"
-                    >
-                      {product.name}
-                    </Typography>
-                    <Box>
+            <Grid item md={3}>
+              <Card>
+                <Link href={`/products/${product.permalink}`}>
+                  <CardActionArea>
+                    <CardMedia
+                      component="img"
+                      alt={product.name}
+                      image={product.media.source}
+                    />
+                    <CardContent>
                       <Typography
-                        variant="body1"
+                        gutterBottom
+                        variant="body2"
                         color="textPrimary"
                         component="p"
                       >
-                        {product.price.formatted_with_symbol}
+                        {product.name}
                       </Typography>
-                    </Box>
-                  </CardContent>
-                </CardActionArea>
-              </Link>
-            </Card>
+                      <Box>
+                        <Typography
+                          variant="body1"
+                          color="textPrimary"
+                          component="p"
+                        >
+                          {product.price.formatted_with_symbol}
+                        </Typography>
+                      </Box>
+                    </CardContent>
+                  </CardActionArea>
+                </Link>
+              </Card>
+            </Grid>
           </Slide>
-        </Grid>
-      ))}
+        ))}
+      </Grid>
     </Layout>
   );
 }

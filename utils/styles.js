@@ -69,56 +69,15 @@ export const useStyles = makeStyles((theme) => ({
     maxWidth: '50rem',
     width: '100%',
   },
-  smallImage: {
-    maxWidth: '30rem',
-    width: '100%',
-  },
-  small: {
-    maxWidth: '30rem',
-    width: '100%',
-  },
   mt1: {
     marginTop: '1rem !important',
-  },
-  banner: {
-    maxWidth: '30rem',
-    width: '100%',
   },
   p1: {
     padding: '1rem !important',
   },
-  btn: {
-    maxWidth: '5rem',
-    width: '100%',
-  },
-  cardMedium: {
-    maxWidth: '10rem',
-    width: '100%',
-  },
-  section: {
-    marginTop: 10,
-    marginBottom: 10,
-  },
-  form: {
-    width: '100%',
-    maxWidth: 800,
-    margin: '0 auto',
-  },
-  navbarButton: {
-    color: '#ffffff',
-    textTransform: 'initial',
-  },
-  transparentBackgroud: {
-    backgroundColor: 'transparent',
-  },
-  error: {
-    color: '#f04040',
-  },
-  fullWidth: {
-    width: '100%',
-  },
-  reviewForm: {
-    maxWidth: 800,
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 120,
     width: '100%',
   },
 }));
